@@ -1,0 +1,23 @@
+{
+  "name": "mwidget",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miguelPerezOntiveros/mWidget.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/miguelPerezOntiveros/mWidget/issues"
+  },
+  "homepage": "https://github.com/miguelPerezOntiveros/mWidget#readme",
+  "devDependencies": {
+    "bootstrap": "^3.3.6",
+    "jquery": "^3.1.0"
+  }
+}

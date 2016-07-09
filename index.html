@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!-- jQuery -->
+	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+
+	<!-- Bootstrap -->
+	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- mWidget 0.1 -->
+	<script src = "vendor/mWidget0.1.js"></script>
+	
+	<title>Document</title>
+</head>
+<body>
+	<div class="container">
+		<h1>List of Friends:</h1><br><br>
+		<div class="row">
+			<div id="res"></div>
+		</div>
+		<footer >
+			<hr>
+			<p>mWidget Proof Of Concept. By Miguel Pérez, 2016.</p>
+			<li>Accepts a data array or just a URL and method to fetch it.</li>
+			<li>Supports GET and POST methods.</li>
+			<li>Supports an optional 'customHandler'.</li>
+		</footer>
+	</div>
+	<script>
+		mWidget({
+			dataURL: 'data/my_data.json',
+			method: 'get',
+			tplURL: 'tpl/my_tpl.tpl.html',
+			target: '#res',
+			customHandler: (data) => {
+				jQuery.each(data, (i, entry) =>{
+					entry.img = (entry.gender == 'Male'? 'img/man.png': 'img/women.png');
+				});
+				return data;
+			}
+		});
+	</script>
+</body>
+</html>
