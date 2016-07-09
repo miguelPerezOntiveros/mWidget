@@ -15,7 +15,7 @@ function mWidget(params){
 	else if(params.dataURL)
 	{
 		$[(params.method || 'get')](params.dataURL, data => {
-			params.data = data;
+			params.data = JSON.parse(data);
 			mWidget(params);	
 		}); 
 	}
