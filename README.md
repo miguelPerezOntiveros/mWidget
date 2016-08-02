@@ -1,5 +1,5 @@
 # mWidget
-This project is a very simple templating system.
+This project is a very simple templating system. ***[DEMO ONLINE](http://miguelp.com/mWidget)***.
 
 ## Input
 - Input is provided as a JavaScript Object.
@@ -35,3 +35,4 @@ This project is a very simple templating system.
 	- The model can be passed directly as an object called _data_, or you can pass in a URL, _dataURL_, for mWidget to get the data.
 - mWidget extends jQuery to keep the global namespace clean.
 - Flexibility and simplicity es preserved by using the _customHandler_.
+- TypeScript is being used to ensure cross browser compatibility while allowing for new development techniques. 
