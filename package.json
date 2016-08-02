@@ -18,6 +18,7 @@
   "homepage": "https://github.com/miguelPerezOntiveros/mWidget#readme",
   "devDependencies": {
     "bootstrap": "^3.3.6",
+    "gulp": "^3.9.1",
     "jquery": "^3.1.0"
   }
 }

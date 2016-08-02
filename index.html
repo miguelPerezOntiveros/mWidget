@@ -12,7 +12,7 @@
 	<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- mWidget 0.1 -->
-	<script src = "vendor/mWidget0.1.js"></script>
+	<script src = "mWidget/mWidget0.1.js"></script>
 	
 	<!-- Google Analytics -->
 	<script>
@@ -29,7 +29,10 @@
 </head>
 <body>
 	<div class="container">
-		<h1>List of Friends:</h1><br><br>
+		<h1>View <a href="https://github.com/miguelPerezOntiveros/mWidget">mWidget</a> on Github</h1>
+		<hr>
+		<h3>Example of mWidget rendering contacts.</h3>
+		<h5>View the data <a href="data/my_data.json.txt">here</a>. View the tpl <a href="tpl/my_tpl.tpl.html">here</a>, click on view source once you get there.</h5><br>
 		<div class="row">
 			<div id="res"></div>
 		</div>
@@ -44,20 +47,16 @@
 				<a class="github-button" href="https://github.com/miguelPerezOntiveros/mWidget/issues" data-icon="octicon-issue-opened" data-style="mega" data-count-api="/repos/miguelPerezOntiveros/mWidget#open_issues_count" data-count-aria-label="# issues on GitHub" aria-label="Issue miguelPerezOntiveros/mWidget on GitHub">Issue</a>
 				<a class="github-button" href="https://github.com/miguelPerezOntiveros/mWidget/archive/master.zip" data-icon="octicon-cloud-download" data-style="mega" aria-label="Download miguelPerezOntiveros/mWidget on GitHub">Download</a>
 			</p>
-			<p>mWidget Proof Of Concept. By Miguel Pérez, 2016.</p>
-			<li>Accepts a data array or just a URL and method to fetch it.</li>
-			<li>Supports GET and POST methods.</li>
-			<li>Supports an optional 'customHandler'.</li>			
+			<p>mWidget Proof Of Concept. By Miguel Pérez, 2016.</p>		
 		</footer>
 	</div>
 	<script>
-		mWidget({
+		$.mWidget({
 			dataURL: 'data/my_data.json.txt',
-			method: 'get',
 			tplURL: 'tpl/my_tpl.tpl.html',
 			target: '#res',
-			customHandler: (data) => {
-				jQuery.each(data, (i, entry) =>{
+			customHandler: function(data) {
+				jQuery.each(data, function(i, entry) { // this .each is not included in the mWidget function to keep things generic. We don´t know if the developer wants this or not, so if he/she wants it, he/she can add it.
 					entry.img = (entry.gender == 'Male'? 'img/man.png': 'img/women.png');
 				});
 				return data;
