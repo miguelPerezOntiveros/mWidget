@@ -12,7 +12,7 @@
 	<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- mWidget 0.1 -->
-	<script src = "mWidget/mWidget0.1.js"></script>
+	<script src = "core/mWidget0.1.js"></script>
 	
 	<!-- Google Analytics -->
 	<script>
@@ -52,8 +52,12 @@
 	</div>
 	<script>
 		$.mWidget({
-			dataURL: 'data/my_data.json.txt',
-			tplURL: 'tpl/my_tpl.tpl.html',
+			dataAjax: {
+				url: 'data/my_data.json.txt'
+			},
+			tplAjax: {
+				url: 'tpl/my_tpl.tpl.html'
+			},
 			target: '#res',
 			customHandler: function(data) {
 				jQuery.each(data, function(i, entry) { // this .each is not included in the mWidget function to keep things generic. We don´t know if the developer wants this or not, so if he/she wants it, he/she can add it.
