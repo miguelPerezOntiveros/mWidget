@@ -1,32 +1,36 @@
 # mWidget
-This project is a very simple templating system. ***[DEMO ONLINE](http://miguelp.com/mWidget)***.
+Simple templating system. ***[ONLINE DEMO](http://miguelp.com/mWidget)***.
 
 ## Input
 - Input is provided as a JavaScript Object.
 - Required members:
-	- _tplURL_
 	- _target_
-	- either _data_ or _dataURL_
+	- either _data_ or _dataAjax_
+	- either _tpl_ or _tplAjax_
 - Optional members:
-	- _method_
 	- _customHandler_
 
 - Example:
 ```javascript
-{
-	dataURL: 'data/my_data.json.txt',
-	method: 'get',
-	tplURL: 'tpl/my_tpl.tpl.html',
+$.mWidget({
+	dataAjax: {
+		url: 'data/my_data.json.txt'
+	},
+	tplAjax: {
+		url: 'tpl/my_tpl.tpl.html'
+	},
 	target: '#res',
 	customHandler: function(data) {
-		jQuery.each(data, function(i, entry) {
+		jQuery.each(data, function(i, entry) { // this .each is not included in the mWidget function to keep things generic. We don´t know if the developer wants this or not, so if he/she wants it, he/she can add it.
 			entry.img = (entry.gender == 'Male'? 'img/man.png': 'img/women.png');
 		});
 		return data;
 	}
-}
+});
 ```
 
+## Mission
+- To provide Base22 developers a mechanism for rendering data that can be integrated on different environments (IBM WebSphere Portal included), and with other tools in a simplistic and transparent manner. Such mechanism should very loosely couple the model, view and controller. Ultimately, to reuse code in order to save resources.
 
 ## Philosophy
 - Model, view and controller are kept as separate as possible.
