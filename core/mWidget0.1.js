@@ -4,6 +4,7 @@
             throw "mWidget parameters object requires a 'tpl'/'tplAjax', a 'data'/'dataAjax' and a 'target' member";
         }
         if (!params.data) {
+            // use the dataAjax object to get the data and then call $.mWidget again.
             params.dataAjax.success = function (data) {
                 params.data = JSON.parse(data);
                 $.mWidget(params);
@@ -11,6 +12,7 @@
             $.ajax(params.dataAjax);
         }
         else if (!params.tpl) {
+            // use the tplAjax object to get the tpl and then call $.mWidget again.
             params.tplAjax.success = function (data) {
                 params.tpl = data;
                 $.mWidget(params);

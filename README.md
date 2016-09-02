@@ -21,8 +21,8 @@ $.mWidget({
 	},
 	target: '#res',
 	customHandler: function(data) {
-		jQuery.each(data, function(i, entry) { // this .each is not included in the mWidget function to keep things generic. We don´t know if the developer wants this or not, so if he/she wants it, he/she can add it.
-			entry.img = (entry.gender == 'Male'? 'img/man.png': 'img/women.png');
+		$.each(data, function(i, entry) { // this $.each is not included inside the $.mWidget implementation, if needed, it can be added like shown here. We know it will not allways be necessary.
+			entry.img = (entry.gender == 'Male'? 'img/man.png': 'img/women.png'); // this is a very simple example of how the data can be modified using a custom handler.
 		});
 		return data;
 	}
