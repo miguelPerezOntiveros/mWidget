@@ -9,7 +9,7 @@
         if (!params.data) {
             // use the dataAjax object to get the data and then call $.mWidget again.
             params.dataAjax.success = function (data) {
-                params.data = JSON.parse(data);
+                params.data = data;
                 $.mWidget(params);
             };
             $.ajax(params.dataAjax);
