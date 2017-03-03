@@ -1,8 +1,113 @@
-[{"name":"Harry Schmidt","email":"hschmidt0@rediff.com","gender":"Male","ip":"249.207.122.23"},
-{"name":"Cynthia Mitchell","email":"cmitchell2@google.com","gender":"Female","ip":"81.61.231.15"},
-{"name":"Jeremy Butler","email":"jbutler3@washingtonpost.com","gender":"Male","ip":"132.237.26.246"},
-{"name":"Diana Burke","email":"dburke5@gizmodo.com","gender":"Female","ip":"199.232.113.22"},
-{"name":"Fred Duncan","email":"fduncan6@elegantthemes.com","gender":"Male","ip":"132.105.82.115"},
-{"name":"Paul Frazier","email":"pfrazier7@tripod.com","gender":"Male","ip":"218.168.247.221"},
-{"name":"Louise Gibson","email":"lgibson8@tripod.com","gender":"Female","ip":"82.195.128.149"},
-{"name":"Donna Knight","email":"dknight9@icq.com","gender":"Female","ip":"125.233.125.111"}]
+[{
+    "name": "Harry Schmidt",
+    "email": "hschmidt0@rediff.com",
+    "gender": "Male",
+    "ip": "249.207.122.23",
+    "interests": [{
+        "name": "basketball"
+    }, {
+        "name": "football"
+    }, {
+        "name": "swimming"
+    }, {
+        "name": "reading"
+    }]
+}, {
+    "name": "Cynthia Mitchell",
+    "email": "cmitchell2@google.com",
+    "gender": "Female",
+    "ip": "81.61.231.15",
+    "interests": [{
+        "name": "baseball"
+    }, {
+        "name": "hiking"
+    }, {
+        "name": "swimming"
+    }, {
+        "name": "reading"
+    }]
+}, {
+    "name": "Jeremy Butler",
+    "email": "jbutler3@washingtonpost.com",
+    "gender": "Male",
+    "ip": "132.237.26.246",
+    "interests": [{
+        "name": "basketball"
+    }, {
+        "name": "football"
+    }, {
+        "name": "racing"
+    }, {
+        "name": "biking"
+    }]
+}, {
+    "name": "Diana Burke",
+    "email": "dburke5@gizmodo.com",
+    "gender": "Female",
+    "ip": "199.232.113.22",
+    "interests": [{
+        "name": "dancing"
+    }, {
+        "name": "programming"
+    }, {
+        "name": "selling"
+    }, {
+        "name": "reading"
+    }]
+}, {
+    "name": "Fred Duncan",
+    "email": "fduncan6@elegantthemes.com",
+    "gender": "Male",
+    "ip": "132.105.82.115",
+    "interests": [{
+        "name": "singing"
+    }, {
+        "name": "dancing"
+    }, {
+        "name": "acting"
+    }, {
+        "name": "painting"
+    }]
+}, {
+    "name": "Paul Frazier",
+    "email": "pfrazier7@tripod.com",
+    "gender": "Male",
+    "ip": "218.168.247.221",
+    "interests": [{
+        "name": "playing"
+    }, {
+        "name": "movies"
+    }, {
+        "name": "music"
+    }, {
+        "name": "painting"
+    }]
+}, {
+    "name": "Louise Gibson",
+    "email": "lgibson8@tripod.com",
+    "gender": "Female",
+    "ip": "82.195.128.149",
+    "interests": [{
+        "name": "acting"
+    }, {
+        "name": "dancing"
+    }, {
+        "name": "swimming"
+    }, {
+        "name": "football"
+    }]
+}, {
+    "name": "Donna Knight",
+    "email": "dknight9@icq.com",
+    "gender": "Female",
+    "ip": "125.233.125.111",
+    "interests": [{
+        "name": "swimming"
+    }, {
+        "name": "basketball"
+    }, {
+        "name": "swimming"
+    }, {
+        "name": "programming"
+    }]
+}]
