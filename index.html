@@ -60,6 +60,7 @@
 			},
 			target: '#res',
 			customHandler: function(data) {
+				data = JSON.parse(data);
 				$.each(data, function(i, entry) { // this $.each is not included inside the $.mWidget implementation, if needed, it can be added like shown here. We know it will not allways be necessary.
 					entry.img = (entry.gender == 'Male'? 'img/man.png': 'img/women.png'); // this is a very simple example of how the data can be modified using a custom handler.
 				});
