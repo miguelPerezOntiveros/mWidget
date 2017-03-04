@@ -4,13 +4,13 @@ Simple templating system. ***[ONLINE DEMO](http://miguelp.com/mWidget)***.
 ## Input
 - Input is provided as a JavaScript Object.
 - Required members:
-	- _target_
 	- either _data_ or _dataAjax_
 	- either _tpl_ or _tplAjax_
 - Optional members:
 	- _customHandler_
+	- _target_
 
-- Example:
+- Example of usage:
 ```javascript
 $.mWidget({
 	dataAjax: {
@@ -21,6 +21,7 @@ $.mWidget({
 	},
 	target: '#res',
 	customHandler: function(data) {
+		data = JSON.parse(data);
 		$.each(data, function(i, entry) { // this $.each is not included inside the $.mWidget implementation, if needed, it can be added like shown here. We know it will not allways be necessary.
 			entry.img = (entry.gender == 'Male'? 'img/man.png': 'img/women.png'); // this is a very simple example of how the data can be modified using a custom handler.
 		});
