@@ -34,7 +34,7 @@
                                     tpl: tplPart.slice(tplPart.indexOf('\n'), -1),
                                     data: entry[tplPart.substring(tplPart.indexOf('[') + 1, tplPart.indexOf('\n'))] || {}
                                 }) :
-                                tplPart.replace(/{[_a-zA-Z][_a-zA-Z0-9]*}/g, function (request) { return entry[request.slice(1, -1)]; });
+                                tplPart.replace(/{[_a-zA-Z][_a-zA-Z0-9]*}/g, function (request) { return (function (data) { return typeof data == 'object' ? JSON.stringify(data) : data; })(entry[request.slice(1, -1)]); });
                         });
                 });
                 res += tempTpl;
