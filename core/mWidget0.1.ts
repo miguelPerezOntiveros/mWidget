@@ -17,20 +17,27 @@
 			$.ajax(params.tplAjax);
 		}
 		else {
-			var res = '';
-			$.each( (params.customHandler || (data => data))(params.data), (i, entry) => { // for each data element, apply the customHandler, default customHandler is 'data => data'. 				
-				var count = 0, tempStart, tempTpl = params.tpl;
-				$.each(params.tpl.split(''), (i, c) => {
-				    if(c == '[' && ++count == 1) 
-						tempStart = i;
-				    if(c == ']' && --count == 0)
-						tempTpl = params.tpl.replace( params.tpl.substring(tempStart, i+1), arrayRequest => $.mWidget({ // use mWidget to compute inner tpl
-																		    tpl: arrayRequest.slice(arrayRequest.indexOf('\n'), -1),
-																		    data: entry[arrayRequest.substring(1, arrayRequest.indexOf('\n'))] || {}
-																		})
-						);
-				});
-                res += tempTpl.replace(/{[_a-zA-Z][_a-zA-Z0-9]*}/g, request => entry[request.slice(1, -1)] );
+            var res = '', parts = [{start: 0, recursive: false}], count = 0;
+            $.each(params.tpl.split(''), function (i, c) { // split tpl in recursive and non recursive parts
+                if ((c == '[' || i == params.tpl.length-1) && ++count == 1)
+                    parts.push({start: i, recursive: true});
+                if (c == ']' && --count == 0)
+                    parts.push({start: i+1, recursive: false});
+            });
+			$.each((params.customHandler || (data => data))(params.data), (i, entry) => { // for each data element, apply the customHandler, default customHandler is 'data => data'. 				
+             	var tempTpl = params.tpl;
+                $.each(parts, function (i, e) { // for each part, do replacements with either recursion or a regex replace
+                    if(i < parts.length-1)
+                        tempTpl = tempTpl.replace(params.tpl.substring(e.start, parts[i+1].start), tplPart => 
+                            e.recursive ?
+                                $.mWidget({
+                                    tpl: tplPart.slice(tplPart.indexOf('\n'), -1),
+                                    data: entry[tplPart.substring(tplPart.indexOf('[')+1, tplPart.indexOf('\n'))] || {}
+                                }) :
+                                tplPart.replace(/{[_a-zA-Z][_a-zA-Z0-9]*}/g, request => entry[request.slice(1, -1)]) 
+                        );
+                });
+                res += tempTpl;
             });
             if (params.target)
                 $(params.target).append(res);
