@@ -18,12 +18,13 @@
         }
         else {
             var res = '', parts = [{ start: 0, recursive: false }], count = 0;
-            $.each(params.tpl.split(''), function (i, c) {
-                if ((c == '[' || i == params.tpl.length - 1) && ++count == 1)
+            for (var i = 0; i < params.tpl.length; i++) {
+                if ((params.tpl[i] == '[' || i == params.tpl.length - 1) && ++count == 1)
                     parts.push({ start: i, recursive: true });
-                if (c == ']' && --count == 0)
+                if (params.tpl[i] == ']' && --count == 0)
                     parts.push({ start: i + 1, recursive: false });
-            });
+            }
+            ;
             $.each((params.customHandler || (function (data) { return data; }))(params.data), function (i, entry) {
                 var tempTpl = params.tpl;
                 $.each(parts, function (i, e) {
@@ -34,7 +35,7 @@
                                     tpl: tplPart.slice(tplPart.indexOf('\n'), -1),
                                     data: entry[tplPart.substring(tplPart.indexOf('[') + 1, tplPart.indexOf('\n'))] || {}
                                 }) :
-                                tplPart.replace(/{[_a-zA-Z][_a-zA-Z0-9]*}/g, function (request) { return (function (data) { return typeof data == 'object' ? JSON.stringify(data) : data; })(entry[request.slice(1, -1)]); });
+                                tplPart.replace(/{[_a-zA-Z][_a-zA-Z0-9]*}/g, function (request) { return (function (data) { return typeof data == 'object' ? JSON.stringify(data, null, 2) : data; })(entry[request.slice(1, -1)]); });
                         });
                 });
                 res += tempTpl;
