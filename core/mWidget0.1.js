@@ -32,8 +32,8 @@
                         tempTpl = tempTpl.replace(params.tpl.substring(e.start, parts[i + 1].start), function (tplPart) {
                             return e.recursive ?
                                 $.mWidget({
-                                    tpl: tplPart.slice(tplPart.indexOf('\n'), -1),
-                                    data: entry[tplPart.substring(tplPart.indexOf('[') + 1, tplPart.indexOf('\n'))] || {}
+                                    tpl: tplPart.slice(/\s/igm.exec(tplPart).index, -1),
+                                    data: entry[tplPart.substring(tplPart.indexOf('[') + 1, /\s/igm.exec(tplPart).index)] || {}
                                 }) :
                                 tplPart.replace(/{[_a-zA-Z][_a-zA-Z0-9]*}/g, function (request) { return (function (data) { return typeof data == 'object' ? JSON.stringify(data, null, 2) : data; })(entry[request.slice(1, -1)]); });
                         });
