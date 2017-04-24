@@ -1,7 +1,7 @@
 (function ($, window, undefined) {
-    $.mWidget = function (params) {
-    	if (!(params.dataAjax || params.data) || !(params.tplAjax || params.tpl) )
-            throw "mWidget parameters object requires a 'tpl'/'tplAjax' and a 'data'/'dataAjax' %o", params;
+	$.mWidget = function (params) {
+		if (!(params.dataAjax || params.data) || !(params.tplAjax || params.tpl) )
+			throw "mWidget parameters object requires a 'tpl'/'tplAjax' and a 'data'/'dataAjax' %o", params;
 		if (!params.data) { // use the dataAjax object to get the data and then call $.mWidget again.
 			params.dataAjax.success = data => {
 				params.data = data;
@@ -17,31 +17,35 @@
 			$.ajax(params.tplAjax);
 		}
 		else {
-            var res = '', parts = [{start: 0, recursive: false}], count = 0;
-            for(var i = 0; i < params.tpl.length; i++){ // split tpl in recursive and non recursive parts
-                if ((params.tpl[i] == '[' || i == params.tpl.length-1) && ++count == 1)
-                    parts.push({start: i, recursive: true});
-                if (params.tpl[i] == ']' && --count == 0)
-                    parts.push({start: i+1, recursive: false});
-            };
-			$.each((params.customHandler || (data => data))(params.data), (i, entry) => { // for each data element, apply the customHandler, default customHandler is 'data => data'. 				
-             	var tempTpl = params.tpl;
-                $.each(parts, function (i, e) { // for each part, do replacements with either recursion or a regex replace
-                    if(i < parts.length-1)
-                        tempTpl = tempTpl.replace(params.tpl.substring(e.start, parts[i+1].start), tplPart => 
-                            e.recursive ?
-                                $.mWidget({
-                                    tpl: tplPart.slice(/\s/igm.exec(tplPart).index, -1),
-                                    data: entry[tplPart.substring(tplPart.indexOf('[')+1, /\s/igm.exec(tplPart).index)] || {}
-                                }) :
-                                tplPart.replace(/{[_a-zA-Z][_a-zA-Z0-9]*}/g, request => (data => typeof data == 'object'? JSON.stringify(data, null, 2): data)(entry[request.slice(1, -1)])   
-                        );
-                });
+			var res = '', parts = [{start: 0, recursive: false}], count = 0;
+			for(var i = 0; i < params.tpl.length; i++){ // split tpl into recursive and non recursive parts
+				if ((params.tpl[i] == '[' || i == params.tpl.length-1) && ++count == 1)
+					parts.push({start: i, recursive: true});
+				if (params.tpl[i] == ']' && --count == 0)
+					parts.push({start: i+1, recursive: false});
+			};
+            var handledData = (params.customHandler || (data => data))(params.data);
+            for(var i = 0; i < handledData.length; i++){
+               var tempTpl = params.tpl;
+                for(var j = 0; j < parts.length-1; j++){
+                    tempTpl = tempTpl.replace(params.tpl.substring(parts[j].start, parts[j+1].start), tplPart => 
+                        parts[j].recursive ?
+                            $.mWidget({
+                                tpl: tplPart.slice(/\s/igm.exec(tplPart).index, -1),
+                                data: handledData[i][tplPart.substring(tplPart.indexOf('[')+1, /\s/igm.exec(tplPart).index)] || {}
+                            }) :
+                            tplPart.replace(/{[_a-zA-Z][_a-zA-Z0-9]*}/g, request => (data => typeof data == 'object'? JSON.stringify(data, null, 2): data)(handledData[i][request.slice(1, -1)])   
+                    );
+                };
                 res += tempTpl;
-            });
-            if (params.target)
-                $(params.target).append(res);
-            return res;
+            }    
+
+			$.each(handledData, (notUsedVariable, entryVariableToBechanged) => { // apply the customHandler for each data element, default customHandler is 'data => data'. 				
+				
+			});
+			if (params.target)
+				$(params.target).append(res);
+			return res;
 		}
 	}
 })(jQuery, window);

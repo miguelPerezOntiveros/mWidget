@@ -25,20 +25,23 @@
                     parts.push({ start: i + 1, recursive: false });
             }
             ;
-            $.each((params.customHandler || (function (data) { return data; }))(params.data), function (i, entry) {
+            var handledData = (params.customHandler || (function (data) { return data; }))(params.data);
+            for (var i = 0; i < handledData.length; i++) {
                 var tempTpl = params.tpl;
-                $.each(parts, function (i, e) {
-                    if (i < parts.length - 1)
-                        tempTpl = tempTpl.replace(params.tpl.substring(e.start, parts[i + 1].start), function (tplPart) {
-                            return e.recursive ?
-                                $.mWidget({
-                                    tpl: tplPart.slice(/\s/igm.exec(tplPart).index, -1),
-                                    data: entry[tplPart.substring(tplPart.indexOf('[') + 1, /\s/igm.exec(tplPart).index)] || {}
-                                }) :
-                                tplPart.replace(/{[_a-zA-Z][_a-zA-Z0-9]*}/g, function (request) { return (function (data) { return typeof data == 'object' ? JSON.stringify(data, null, 2) : data; })(entry[request.slice(1, -1)]); });
-                        });
-                });
+                for (var j = 0; j < parts.length - 1; j++) {
+                    tempTpl = tempTpl.replace(params.tpl.substring(parts[j].start, parts[j + 1].start), function (tplPart) {
+                        return parts[j].recursive ?
+                            $.mWidget({
+                                tpl: tplPart.slice(/\s/igm.exec(tplPart).index, -1),
+                                data: handledData[i][tplPart.substring(tplPart.indexOf('[') + 1, /\s/igm.exec(tplPart).index)] || {}
+                            }) :
+                            tplPart.replace(/{[_a-zA-Z][_a-zA-Z0-9]*}/g, function (request) { return (function (data) { return typeof data == 'object' ? JSON.stringify(data, null, 2) : data; })(handledData[i][request.slice(1, -1)]); });
+                    });
+                }
+                ;
                 res += tempTpl;
+            }
+            $.each(handledData, function (notUsedVariable, entryVariableToBechanged) {
             });
             if (params.target)
                 $(params.target).append(res);
