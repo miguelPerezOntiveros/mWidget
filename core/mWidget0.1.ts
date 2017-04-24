@@ -24,9 +24,9 @@
 				if (params.tpl[i] == ']' && --count == 0)
 					parts.push({start: i+1, recursive: false});
 			};
-            var handledData = (params.customHandler || (data => data))(params.data);
+            var handledData = (params.customHandler || (data => data))(params.data); // apply the customHandler, default customHandler is 'data => data'
             for(var i = 0; i < handledData.length; i++){
-               var tempTpl = params.tpl;
+                var tempTpl = params.tpl;
                 for(var j = 0; j < parts.length-1; j++){
                     tempTpl = tempTpl.replace(params.tpl.substring(parts[j].start, parts[j+1].start), tplPart => 
                         parts[j].recursive ?
@@ -39,10 +39,6 @@
                 };
                 res += tempTpl;
             }    
-
-			$.each(handledData, (notUsedVariable, entryVariableToBechanged) => { // apply the customHandler for each data element, default customHandler is 'data => data'. 				
-				
-			});
 			if (params.target)
 				$(params.target).append(res);
 			return res;
