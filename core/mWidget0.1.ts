@@ -34,7 +34,7 @@
                                 tpl: tplPart.slice(/\s/igm.exec(tplPart).index, -1),
                                 data: handledData[i][tplPart.substring(tplPart.indexOf('[')+1, /\s/igm.exec(tplPart).index)] || {}
                             }) :
-                            tplPart.replace(/{[_a-zA-Z][_a-zA-Z0-9]*}/g, request => (data => typeof data == 'object'? JSON.stringify(data, null, 2): data)(handledData[i][request.slice(1, -1)])   
+                            tplPart.replace(/{[_a-zA-Z][_a-zA-Z0-9]*}/g, request => (data => typeof data == 'object'? JSON.stringify(data, null, 2): data)(handledData[i][request.slice(1, -1)]))   
                     );
                 };
                 res += tempTpl;
