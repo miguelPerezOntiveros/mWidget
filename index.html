@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<!-- Required meta tags -->
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
 	<!-- jQuery -->
-	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="vendor/jquery.min.js"></script>
 
-	<!-- Bootstrap -->
-	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-	<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
 
 	<!-- mWidget 0.1 -->
-	<script src = "core/mWidget0.1.js"></script>
+	<script src = "js/mWidget0.2.js"></script>
 	
 	<!-- Google Analytics -->
 	<script>
@@ -29,13 +30,15 @@
 </head>
 <body>
 	<div class="container">
-		<h1>View <a href="https://github.com/miguelPerezOntiveros/mWidget">mWidget</a> on Github</h1>
-		<hr>
-		<h3>Example of mWidget rendering contacts.</h3>
-		<h5>View the data <a href="data/my_data.json.txt">here</a>. View the tpl <a href="tpl/my_tpl.tpl.html">here</a>, click on view source once you get there.</h5><br>
 		<div class="row">
-			<div id="res"></div>
+			<div class="col-md-12">
+				<h1>View <a href="https://github.com/miguelPerezOntiveros/mWidget">mWidget</a> on Github</h1>
+				<hr>
+				<h3>Example of mWidget rendering contacts.</h3>
+				<h5>View the data <a href="data/my_data.json.txt">here</a>. View the tpl <a href="tpl/my_tpl.tpl.html">here</a>, click on view source once you get there.</h5><br>
+			</div>
 		</div>
+		<div class="row" id="res"></div>
 		<footer >
 			<hr>
 			<!-- https://buttons.github.io -->
@@ -50,22 +53,25 @@
 			<p>mWidget Proof Of Concept. By Miguel Pérez, 2016.</p>		
 		</footer>
 	</div>
+
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
 	<script>
-		$.mWidget({
-			dataAjax: {
-				url: 'data/my_data.json.txt'
-			},
-			tplAjax: {
-				url: 'tpl/my_tpl.tpl.html'
-			},
+		mWidget({
+			dataURL: 'data/my_data.json.txt',
+			tplURL: 'tpl/my_tpl.tpl.html',
 			target: '#res',
-			customHandler: function(data) {
-				data = JSON.parse(data);
-				$.each(data, function(i, entry) { // this $.each is not included inside the $.mWidget implementation, if needed, it can be added like shown here. We know it will not allways be necessary.
-					entry.img = (entry.gender == 'Male'? 'img/man.png': 'img/women.png'); // this is a very simple example of how the data can be modified using a custom handler.
-				});
-				return data;
-			}
+			customHandler: data => {
+				data = JSON.parse(data)
+				data.forEach(e => { // this forEach is not included inside the $.mWidget implementation, if needed, it can be added like shown here. We know it will not allways be necessary.
+					e.img = (e.gender == 'Male'? 'img/man.png': 'img/women.png') // this is a very simple example of how the data can be modified using a custom handler.
+				})
+				return data
+			},
+			success: res=>{console.log(res)}
 		});
 	</script>
 </body>

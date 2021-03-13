@@ -1,20 +1,21 @@
-<div class="col-md-6">
-	<div class="panel panel-primary">
-		<div class="panel-heading"><h2 class="panel-title">{name}</h3></div>
-		<div class="panel-body">
-			<div class="col-md-6">
+<div class="col-md-3">
+	<div class="card">
+		<img src="{img}" class="card-img-top" alt="...">
+		<div class="card-body">
+			<h5 class="card-title">{name}</h5>
+			<p class="card-text">
 				Email: {email}<br>
 				IP: {ip}<br>
 				Interests:<br>
 				<ul>
 				[interests
 					<li>{name}</li>
+					[reasons
+						{description},
+					]
 				]
 				</ul>
-			</div>
-			<div class="col-md-6">
-				<img src="{img}">
-			</div>
+			</p>
 		</div>
 	</div>
 </div>
