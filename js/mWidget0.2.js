@@ -22,7 +22,7 @@ mWidget = params => {
         var handledData = (params.customHandler || (data => data))(params.data) // apply the customHandler, default customHandler is 'data => data'
         handledData.forEach(dataPiece => {
             parts.forEach((part, i) => {
-                var tplPart = params.tpl.substring(part.start, i==parts.length-1? params.tpl.length-1: parts[i+1].start)
+                var tplPart = params.tpl.substring(part.start, i==parts.length-1? params.tpl.length: parts[i+1].start)
                 res += part.recursive?
                     mWidget({
                         tpl: tplPart.slice(/\s/igm.exec(tplPart).index, -1),
