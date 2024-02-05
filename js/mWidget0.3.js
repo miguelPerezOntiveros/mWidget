@@ -33,10 +33,10 @@ mWidget = params => {
                     mWidget({
                         template: templatePart.slice(/\s/.exec(templatePart).index, -1),
                         data: (dataPiece[templatePart.substring(1, /\s/.exec(templatePart).index)] || []).map(dataPieceValue =>
-							({	
-								...dataPieceValue,
-								'_parent': dataPiece
-							})
+                            ({
+                                ...dataPieceValue,
+                                '_parent': dataPiece
+                            })
 						)
                     }) :
                     templatePart.replace(/{[_a-zA-Z][\._a-zA-Z0-9]*}/g, interpolation => {
