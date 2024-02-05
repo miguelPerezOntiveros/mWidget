@@ -37,7 +37,7 @@ mWidget = params => {
                                 ...dataPieceValue,
                                 '_parent': dataPiece
                             })
-						)
+                        )
                     }) :
                     templatePart.replace(/{[_a-zA-Z][\._a-zA-Z0-9]*}/g, interpolation => {
                     	let dataPieceValue = dataPiece
