@@ -23,7 +23,7 @@ mWidget = params => {
             }
         })        
         if(pending_closing_brackets){
-        	throw 'mWidget template has unbalanced square brackets'
+            throw 'mWidget template has unbalanced square brackets'
         }
         let result = '';
         (params.customHandler || (data => data))(params.data).forEach(dataPiece => {
@@ -40,10 +40,10 @@ mWidget = params => {
                         )
                     }) :
                     templatePart.replace(/{[_a-zA-Z][\._a-zA-Z0-9]*}/g, interpolation => {
-                    	let dataPieceValue = dataPiece
-                    	interpolation.slice(1, -1).split('.').forEach(attribute => {
-                    		dataPieceValue = dataPieceValue[attribute] || ''
-                    	})
+                        let dataPieceValue = dataPiece
+                        interpolation.slice(1, -1).split('.').forEach(attribute => {
+                            dataPieceValue = dataPieceValue[attribute] || ''
+                        })
                         if(typeof dataPieceValue == 'object'){
                             return JSON.stringify(dataPieceValue, null, 2)
                         }
@@ -51,7 +51,7 @@ mWidget = params => {
                             return dataPieceValue
                         }
                         else{
-                        	return ''
+                            return ''
                         }
                     })
             })
