@@ -1,8 +1,8 @@
 # mWidget
 Simple templating system.
 
-## Input
-- Input is provided as a JavaScript Object.
+## Usage
+The `mWidget` function receives a JavaScript Object with:
 - Required members:
 	- either _data_ or _dataURL_
 	- either _tpl_ or _tplURL_
@@ -28,6 +28,9 @@ mWidget({
 });
 ```
 
+## Templates
+Support iterating arrays.  
+Support referencing values from ancestor objects through the `_parent` key.  
 
 ## Philosophy
 - Model, view and controller are kept as separate as possible.

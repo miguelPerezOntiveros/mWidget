@@ -13,7 +13,7 @@
 
 
 	<!-- mWidget 0.1 -->
-	<script src = "js/mWidget0.2.js"></script>
+	<script src = "js/mWidget0.3.js"></script>
 	
 	<!-- Google Analytics -->
 	<script>
@@ -62,12 +62,12 @@
 	<script>
 		mWidget({
 			dataURL: 'data/my_data.json.txt',
-			tplURL: 'tpl/my_tpl.tpl.html',
+			templateURL: 'tpl/my_tpl.tpl.html',
 			target: '#res',
-			customHandler: data => {
+			customHandler: data => { // this is a very simple example of how the data can be modified using a custom handler.
 				data = JSON.parse(data)
-				data.forEach(e => { // this forEach is not included inside the $.mWidget implementation, if needed, it can be added like shown here. We know it will not allways be necessary.
-					e.img = (e.gender == 'Male'? 'img/man.png': 'img/women.png') // this is a very simple example of how the data can be modified using a custom handler.
+				data.forEach(e => {
+					e.img = (e.gender == 'Male'? 'img/man.png': 'img/women.png')
 				})
 				return data
 			},

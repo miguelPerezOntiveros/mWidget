@@ -4,16 +4,21 @@
 		<div class="card-body">
 			<h5 class="card-title">{name}</h5>
 			<p class="card-text">
-				Email: {email}<br>
-				IP: {ip}<br>
-				Interests:<br>
+				<strong>Email:</strong> {email}<br>
+				<strong>IP:</strong> {ip}<br>
+				<strong>Skills:</strong>
 				<ul>
-				[interests
-					<li>{name}</li>
-					[reasons
-						{description},
+					[skills
+						<li>{name}</li>
 					]
-				]
+				</ul>
+				<strong>Skill details:</strong>
+				<ul>
+					[skills
+						[achievements
+							<li>{_parent._parent.name} showed {level} {_parent.name} skills when {description}</li>
+						]
+					]
 				</ul>
 			</p>
 		</div>
